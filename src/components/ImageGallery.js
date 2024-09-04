@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef} from 'react';
 import Modal from './Modal/Modal';
 
 const accessKey = '9GvsSTcW2mP70g9hJaHg8seiL3_ZMePV0ztjtApbtjc';
@@ -31,20 +31,20 @@ const ImageGallery = ({ keyword }) => {
             setLoading(false);
         }
     }, [keyword, page]);
-
+     // eslint-disable-next-line
     useEffect(() => {
         if (keyword) {
             setImages([]);
             setPage(1);
             fetchImages();
         }
-    }, [keyword]);
+    }, [keyword,fetchImages]);
 
     useEffect(() => {
         if (page > 1) {
             fetchImages();
         }
-    }, [page]);
+    }, [page,fetchImages]);
 
     const handleShowMore = () => {
         const scrollPosition = window.scrollY;
@@ -67,7 +67,7 @@ const ImageGallery = ({ keyword }) => {
             {error && <p>{error}</p>}
             <div className="gallery">
                 {images.map((image) => (
-                    <a key={image.id} onClick={() => openModal(image)}>
+                    <a href={image.id} onClick={() => openModal(image)}>
                         <img src={image.urls.small} alt={image.alt_description} />
                     </a>
                 ))}
